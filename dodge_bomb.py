@@ -35,6 +35,8 @@ def main():
     kk_img6 = pg.transform.rotozoom(kk_img, -45, 2.0)
     kk_img7 = pg.transform.rotozoom(kk_img, -90, 2.0)
     
+    kk_lst = [kk_img, kk_img1, kk_img2, kk_img3, kk_img4, kk_img5, kk_img6, kk_img7]
+    
     
 
     kk_rct = kk_img.get_rect()
@@ -63,15 +65,33 @@ def main():
             
         screen.blit(bg_img, [0, 0])
         """こうかとん"""
+        kk_direction = 0
         key_lst = pg.key.get_pressed()
         sum_mv = [0, 0]
         for key, mv in delta.items():
             if key_lst[key]:
                 sum_mv[0] += mv[0]  # 練習３：横方向の合計移動量
                 sum_mv[1] += mv[1]  # 練習３：縦方向の合計移動量
+                if key == pg.K_RIGHT:
+                    kk_direction = 0
+                elif key == pg.K_UP:
+                    kk_direction = 1
+                elif key == pg.K_DOWN:
+                    kk_direction = 2
+                elif key == pg.K_LEFT:
+                    kk_direction = 3
         kk_rct.move_ip(sum_mv[0], sum_mv[1])  # 練習３：移動させる
         if check_bound(kk_rct) != (True, True):  # 練習４：はみだし判定
             kk_rct.move_ip(-sum_mv[0], -sum_mv[1]) 
+            
+        if kk_direction == 0:  # 右向き
+            rotated_kk_img = kk_lst[3]
+        elif kk_direction == 1:  # 上向き
+            rotated_kk_img = kk_lst[5]
+        elif kk_direction == 2:  # 下向き
+            rotated_kk_img = kk_lst[7]
+        elif kk_direction == 3:  # 左向き
+            rotated_kk_img = kk_img    
         screen.blit(kk_img, kk_rct)  # 練習３：移動後の座標に表示させる
         """"ばくだん"""
         bd_rct.move_ip(vx, vy)  # 練習２：爆弾を移動させる
