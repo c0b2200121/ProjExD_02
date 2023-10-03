@@ -93,6 +93,7 @@ def main():
         elif kk_direction == 3:  # 左向き
             rotated_kk_img = kk_img    
         screen.blit(kk_img, kk_rct)  # 練習３：移動後の座標に表示させる
+        
         """"ばくだん"""
         bd_rct.move_ip(vx, vy)  # 練習２：爆弾を移動させる
         yoko, tate = check_bound(bd_rct)
