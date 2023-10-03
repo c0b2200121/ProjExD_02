@@ -26,14 +26,14 @@ def main():
     bg_img = pg.image.load("ex02/fig/pg_bg.jpg")
     """こうかとん"""
     kk_img = pg.image.load("ex02/fig/3.png") #演習問題１　途中
-    kk_img = pg.transform.rotozoom(kk_img, 0, 2.0)
-    kk_img1 = pg.transform.rotozoom(kk_img, 45, 2.0)
-    kk_img2 = pg.transform.rotozoom(kk_img, -45, 2.0)
+    kk_img = pg.transform.rotozoom(kk_img, 0, 1.0)
+    kk_img1 = pg.transform.rotozoom(kk_img, 45, 1.0)
+    kk_img2 = pg.transform.rotozoom(kk_img, -45, 1.0)
     kk_img3 = pg.transform.flip(kk_img, True, False)
-    kk_img4 = pg.transform.rotozoom(kk_img, 45, 2.0)
-    kk_img5 = pg.transform.rotozoom(kk_img, 90, 2.0)
-    kk_img6 = pg.transform.rotozoom(kk_img, -45, 2.0)
-    kk_img7 = pg.transform.rotozoom(kk_img, -90, 2.0)
+    kk_img4 = pg.transform.rotozoom(kk_img, 45, 1.0)
+    kk_img5 = pg.transform.rotozoom(kk_img, -90, 1.0)
+    kk_img6 = pg.transform.rotozoom(kk_img, -45, 1.0)
+    kk_img7 = pg.transform.rotozoom(kk_img, 90, 1.0)
     
     kk_lst = [kk_img, kk_img1, kk_img2, kk_img3, kk_img4, kk_img5, kk_img6, kk_img7]
     
@@ -91,8 +91,9 @@ def main():
         elif kk_direction == 2:  # 下向き
             rotated_kk_img = kk_lst[7]
         elif kk_direction == 3:  # 左向き
-            rotated_kk_img = kk_img    
-        screen.blit(kk_img, kk_rct)  # 練習３：移動後の座標に表示させる
+            rotated_kk_img = kk_img   
+        
+        screen.blit(rotated_kk_img, kk_rct)  # 練習３：移動後の座標に表示させる
         
         """"ばくだん"""
         bd_rct.move_ip(vx, vy)  # 練習２：爆弾を移動させる
