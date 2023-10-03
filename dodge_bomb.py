@@ -25,10 +25,21 @@ def main():
     screen = pg.display.set_mode((WIDTH, HEIGHT))
     bg_img = pg.image.load("ex02/fig/pg_bg.jpg")
     """こうかとん"""
-    kk_img = pg.image.load("ex02/fig/3.png")
+    kk_img = pg.image.load("ex02/fig/3.png") #演習問題１　途中
     kk_img = pg.transform.rotozoom(kk_img, 0, 2.0)
+    kk_img1 = pg.transform.rotozoom(kk_img, 45, 2.0)
+    kk_img2 = pg.transform.rotozoom(kk_img, -45, 2.0)
+    kk_img3 = pg.transform.flip(kk_img, True, False)
+    kk_img4 = pg.transform.rotozoom(kk_img, 45, 2.0)
+    kk_img5 = pg.transform.rotozoom(kk_img, 90, 2.0)
+    kk_img6 = pg.transform.rotozoom(kk_img, -45, 2.0)
+    kk_img7 = pg.transform.rotozoom(kk_img, -90, 2.0)
+    
+    
+
     kk_rct = kk_img.get_rect()
     kk_rct.center = (900, 400)  # 練習３：こうかとんの初期座標を設定する
+    
     """ばくだん"""
     bd_img = pg.Surface((20, 20))  # 練習１：爆弾Surfaceを作成する
     bd_img.set_colorkey((0, 0, 0))  # 練習１：黒い部分を透明にする
@@ -39,6 +50,8 @@ def main():
     vx, vy = +5, +5  # 練習２：爆弾の速度
     clock = pg.time.Clock()
     tmr = 0
+    accs = [a for a in range(1, 11)]
+    
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT: 
@@ -68,6 +81,17 @@ def main():
         if not tate:  # 練習４：縦方向にはみ出たら
             vy *= -1
         screen.blit(bd_img, bd_rct)  # 練習１：Rectを使って試しにblit
+        
+        accs = [a for a in range(1, 11)] # 演習問題２；時間とともに爆弾が加速する　
+        bb_imgs = []
+        
+        for r in range(1, 11):
+            bb_img = pg.Surface((20*r , 20*r))
+            pg.draw.circle(bb_img, (255, 0, 0), (10*r, 10*r), 10*r)
+            bb_imgs.append(bb_img)
+            
+        avx, avy = vx*accs[min(tmr//500, 9)], vy*accs[min(tmr//500, 9)]
+        bb_img = bb_imgs[min(tmr// 500, 9)]
 
         pg.display.update()
         tmr += 1
